@@ -62,8 +62,8 @@
             <td>{{ $member->membership_type }}</td>
             <td>{{ $member->membership_expiration }}</td>
             <td>
-              <a class="btn btn-sm" href="#">🖊️</a>
-              <a class="btn btn-sm" href="#">❌</a>
+              <button type="button" class="btn btn-small" onclick="showEditMemberModal({{ $member->id }});">🖊️</button>
+              <a class="btn btn-sm" href="{{ route('deletemember', $member->id) }}">❌</a>
             </td>
           </tr>
           @endforeach
@@ -102,8 +102,45 @@
                 </div>
                 <div class="mb-3">
                   <label for="createmember_memexp" class="form-label">Membership Expiration</label>
-                  <input type="date" class="form-control" name="membership_expiration" id="createmember_memexp" required>
+                  <input type="date" class="form-control" name="membership_expiration" id="createmember_memexp">
                   <input type="hidden" name="id" id="id"">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Member Modal -->
+    <div class="modal modal-lg fade" id="editMemberModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Member</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card py-3 px-4 border-0">
+              <form method="POST" action="{{ route('updatemember') }}">
+                @csrf
+                <div class="mb-3">
+                  <label for="editmember_name" class="form-label">Name</label>
+                  <input type="text" class="form-control" name="name" id="editmember_name" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editmember_email" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" id="editmember_email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editmember_memtype" class="form-label">Membership Type</label>
+                  <input type="string" class="form-control" name="membership_type" id="editmember_memtype" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editmember_memexp" class="form-label">Membership Expiration</label>
+                  <input type="date" class="form-control" name="membership_expiration" id="editmember_memexp" required>
+                  <input type="hidden" name="id" id="editmember_id"">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
@@ -119,8 +156,22 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
   <script>
+    const editMemberModal = new bootstrap.Modal('#editMemberModal', {
+      keyboard: false
+    });
 
-
+    function showEditMemberModal(member_id) {
+      fetch('{{ url('/members/') }}/' + member_id)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('editmember_name').value = data.name;
+            document.getElementById('editmember_email').value = data.email;
+            document.getElementById('editmember_memtype').value = data.membership_type;
+            document.getElementById('editmember_memexp').value = data.membership_expiration;
+            document.getElementById('editmember_id').value = data.id;
+            editMemberModal.show();
+        })
+    }
 
   </script>
 

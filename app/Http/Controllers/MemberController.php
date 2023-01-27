@@ -37,21 +37,21 @@ class MemberController extends Controller
     public function updateMember(Request $request) {
         $member = Member::find($request->id);
 
-        $member->name = $request->name;
+        $member->name  = $request->name;
         $member->email = $request->email;
         $member->membership_type = $request->membership_type;
         $member->membership_expiration = $request->membership_expiration;
 
         $member->save();
 
-        return redirect()->route('index')->with('sucess', 'Member is successfully updated!');
+        return redirect()->route('index')->with('success', 'Member is successfully updated!');
     }        
 
     public function deleteMember($id) {
         $member = Member::find($id);
         $member->delete();
 
-        return redirect()->route('index')->with('sucess', 'Member is successfully deleted!');
+        return redirect()->route('index')->with('success', 'Member is successfully deleted!');
     }
 
     // For modal display

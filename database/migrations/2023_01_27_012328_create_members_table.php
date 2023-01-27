@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('membership_type');
-            $table->date('membership_expiration');
+            $table->date('membership_expiration')->nullable();
 
             // trainer_id
             // membership_id
