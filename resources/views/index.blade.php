@@ -150,10 +150,15 @@
                   <label for="editmember_email" class="form-label">Email</label>
                   <input type="email" class="form-control" name="email" id="editmember_email" required>
                 </div>
-                <!-- <div class="mb-3">
-                  <label for="editmember_memtype" class="form-label">Membership Type</label>
-                  <input type="string" class="form-control" name="membership_type" id="editmember_memtype" required>
-                </div> -->
+                <div class="mb-3">
+                  <label for="editmember_membership" class="form-label">Select Membership</label>
+                  <select class="form-select" aria-label="Default select example" name="membership_id" id="editmember_membership">
+                      <option selected class="text-center"> --- ---</option>                    
+                    @foreach($membership as $mem)
+                      <option value="{{ $mem->id }}">{{ $mem->membership_type }}</option>
+                    @endforeach
+                  </select>
+                </div>
                 <div class="mb-3">
                   <label for="editmember_trainer" class="form-label">Select Trainer</label>
                   <select class="form-select" aria-label="Default select example" name="trainer_id" id="editmember_trainer">
@@ -192,7 +197,7 @@
         .then(data => {
             document.getElementById('editmember_name').value = data.name;
             document.getElementById('editmember_email').value = data.email;
-            // document.getElementById('editmember_memtype').value = data.membership_type;
+            document.getElementById('editmember_membership').value = data.membership_id;
             document.getElementById('editmember_trainer').value = data.trainer_id;
             document.getElementById('editmember_memexp').value = data.membership_expiration;
             document.getElementById('editmember_id').value = data.id;
