@@ -47,7 +47,7 @@
             <td>Member ID</td>
             <td>Name</td>
             <td>Email</td>
-            <!-- <td>Membership Type</td> -->
+            <td>Membership Type</td>
             <td>Membership Expiration</td>
             <td>Trainer</td>
             <td>Action</td>
@@ -60,7 +60,7 @@
             <td>{{ $member->id }}</td>
             <td>{{ $member->name }}</td>
             <td>{{ $member->email }}</td>
-            <!-- <td>{{ $member->membership_type }}</td> -->
+            <td>{{ $member->membership->membership_type }}</td>
             <td>{{ $member->membership_expiration }}</td>
             <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
               {{ $member->trainer->name }}</a></td>
