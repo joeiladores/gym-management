@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use App\Models\Trainer;
 use App\Models\Member;
+use App\Models\Membership;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,8 +43,23 @@ class DatabaseSeeder extends Seeder
                 // 'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
                 'membership_expiration' => '2023-06-15',
                 'trainer_id' => fake()->randomDigit+1,
-                
-            ]);
-        }
+                'membership_id' => fake()->randomDigit(3)+1,
+               
+            ]);            
+        }  
+
+        // Membership
+        \App\Models\Membership::create([        
+            'membership_type' => 'Annual',   
+            'membership_price' => 10000,
+        ]);   
+        \App\Models\Membership::create([        
+            'membership_type' => 'Monthly',   
+            'membership_price' => 1000,
+        ]); 
+        // \App\Models\Membership::create([        
+        //     'membership_type' => 'Pay-As-You-Go',   
+        //     'membership_price' => 10000,
+        // ]); 
     }
 }
