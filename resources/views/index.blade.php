@@ -47,7 +47,7 @@
             <td>Member ID</td>
             <td>Name</td>
             <td>Email</td>
-            <td>Membership Type</td>
+            <!-- <td>Membership Type</td> -->
             <td>Membership Expiration</td>
             <td>Trainer</td>
             <td>Action</td>
@@ -60,7 +60,7 @@
             <td>{{ $member->id }}</td>
             <td>{{ $member->name }}</td>
             <td>{{ $member->email }}</td>
-            <td>{{ $member->membership_type }}</td>
+            <!-- <td>{{ $member->membership_type }}</td> -->
             <td>{{ $member->membership_expiration }}</td>
             <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
               {{ $member->trainer->name }}</a></td>
@@ -99,9 +99,18 @@
                   <label for="createmember_email" class="form-label">Email</label>
                   <input type="email" class="form-control" name="email" id="createmember_email" required>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                   <label for="createmember_memtype" class="form-label">Membership Type</label>
                   <input type="string" class="form-control" name="membership_type" id="createmember_memtype" required>
+                </div> -->
+                <div class="mb-3">
+                  <label for="createmember_trainer" class="form-label">Select Trainer</label>
+                  <select class="form-select" aria-label="Default select example" name="trainer_id" id="createmember_trainer">
+                      <option selected class="text-center"> --- ---</option>                    
+                    @foreach($trainers as $trainer)
+                      <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label for="createmember_memexp" class="form-label">Membership Expiration</label>
@@ -136,9 +145,18 @@
                   <label for="editmember_email" class="form-label">Email</label>
                   <input type="email" class="form-control" name="email" id="editmember_email" required>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                   <label for="editmember_memtype" class="form-label">Membership Type</label>
                   <input type="string" class="form-control" name="membership_type" id="editmember_memtype" required>
+                </div> -->
+                <div class="mb-3">
+                  <label for="editmember_trainer" class="form-label">Select Trainer</label>
+                  <select class="form-select" aria-label="Default select example" name="trainer_id" id="editmember_trainer">
+                      <option selected class="text-center"> --- ---</option>                    
+                    @foreach($trainers as $trainer)
+                      <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label for="editmember_memexp" class="form-label">Membership Expiration</label>
@@ -169,7 +187,8 @@
         .then(data => {
             document.getElementById('editmember_name').value = data.name;
             document.getElementById('editmember_email').value = data.email;
-            document.getElementById('editmember_memtype').value = data.membership_type;
+            // document.getElementById('editmember_memtype').value = data.membership_type;
+            document.getElementById('editmember_trainer').value = data.trainer_id;
             document.getElementById('editmember_memexp').value = data.membership_expiration;
             document.getElementById('editmember_id').value = data.id;
             editMemberModal.show();

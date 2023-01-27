@@ -18,9 +18,10 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('email');
-            $table->string('membership_type');
+            // $table->string('membership_type');
             $table->date('membership_expiration');
             $table->foreignId('trainer_id')->default(1);
+            $table->foreignId('membership_id')->default(1);
             // $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade');
             $table->timestamps();
         });

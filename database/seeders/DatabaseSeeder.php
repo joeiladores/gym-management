@@ -39,9 +39,10 @@ class DatabaseSeeder extends Seeder
             \App\Models\Member::create([
                 'name' => fake()->name,
                 'email' => fake()->safeEmail,
-                'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
+                // 'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
                 'membership_expiration' => '2023-06-15',
                 'trainer_id' => fake()->randomDigit+1,
+                
             ]);
         }
     }

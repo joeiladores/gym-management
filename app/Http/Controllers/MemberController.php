@@ -9,7 +9,7 @@ use App\Models\Trainer;
 class MemberController extends Controller
 {
     public function index() {
-        return view('index')->with('members', Member::all());
+        return view('index')->with('members', Member::orderBy('created_at', 'desc')->paginate(10))->with('trainers', Trainer::get());;
     }
 
     public function createMember() {
@@ -20,8 +20,9 @@ class MemberController extends Controller
         $member = new Member;
 
         $member->name = $request->name;
-        $member->email = $request->email;
-        $member->membership_type = $request->membership_type;
+        $member->email = $request->email;        
+        // $member->membership_type = $request->membership_type;
+        $member->trainer_id = $request->trainer_id;
         $member->membership_expiration = $request->membership_expiration;
 
         $member->save();
@@ -40,7 +41,8 @@ class MemberController extends Controller
 
         $member->name  = $request->name;
         $member->email = $request->email;
-        $member->membership_type = $request->membership_type;
+        // $member->membership_type = $request->membership_type;
+        $member->trainer_id = $request->trainer_id;
         $member->membership_expiration = $request->membership_expiration;
 
         $member->save();

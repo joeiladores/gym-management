@@ -15,10 +15,10 @@ class Member extends Model
     protected $fillable = [
         'name',
         'email',
-        'membership_type',
+        // 'membership_type',
         'membership_expiratation',
         'trainer_id',
-        // 'membership_id',
+        'membership_id',
     ];
 
     public function trainer()
@@ -26,10 +26,10 @@ class Member extends Model
         return $this->belongsTo(Trainer::class);
     }
 
-    // public function membership()
-    // {
-    //     return $this->belongsTo(Membership::class);
-    // }
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
 
     
 
