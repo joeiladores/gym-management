@@ -55,21 +55,21 @@
         </thead>
         <tbody>
           @if(count($members) > 0)
-          @foreach($members as $member)
-          <tr>
-            <td>{{ $member->id }}</td>
-            <td>{{ $member->name }}</td>
-            <td>{{ $member->email }}</td>
-            <td>{{ $member->membership->membership_type }}</td>
-            <td>{{ $member->membership_expiration }}</td>
-            <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
-              {{ $member->trainer->name }}</a></td>
-            <td>              
-              <button type="button" class="btn btn-small" onclick="showEditMemberModal({{ $member->id }});">🖊️</button>
-              <a class="btn btn-sm" href="{{ route('deletemember', $member->id) }}">❌</a>
-            </td>
-          </tr>
-          @endforeach
+            @foreach($members as $member)
+            <tr>
+              <td>{{ $member->id }}</td>
+              <td>{{ $member->name }}</td>
+              <td>{{ $member->email }}</td>
+              <td>{{ $member->membership->membership_type }}</td>
+              <td>{{ $member->membership_expiration }}</td>
+              <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
+                {{ $member->trainer->name }}</a></td>
+              <td>              
+                <button type="button" class="btn btn-small" onclick="showEditMemberModal({{ $member->id }});">🖊️</button>
+                <a class="btn btn-sm" href="{{ route('deletemember', $member->id) }}">❌</a>
+              </td>
+            </tr>
+            @endforeach
           @else
           <tr>
             <td colspan="6" class="p-3 text-center">There are no members yet in the database.</td>
