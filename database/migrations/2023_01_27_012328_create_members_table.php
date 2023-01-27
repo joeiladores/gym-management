@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('membership_type');
             $table->date('membership_expiration');
+
+            // trainer_id
+            // membership_id
             
             $table->timestamps();
         });
