@@ -16,18 +16,22 @@ class Member extends Model
         'name',
         'email',
         'membership_type',
-        'membership_expiration',
+        'membership_expiratation',
+        'trainer_id',
+        // 'membership_id',
     ];
+
+    public function trainer()
+    {
+        return $this->belongsTo(Trainer::class);
+    }
 
     // public function membership()
     // {
     //     return $this->belongsTo(Membership::class);
     // }
 
-    // public function trainer()
-    // {
-    //     return $this->belongsTo(Trainer::class);
-    // }
+    
 
     
 }

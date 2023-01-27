@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
+use App\Models\Trainer;
 
 class MemberController extends Controller
 {
@@ -59,4 +60,10 @@ class MemberController extends Controller
         $member = Member::find($id);
         return response()->json($member);
     }
+
+    public function getTrainer($id){
+        $trainer = Trainer::find($id);
+        return view('trainer', ['trainer' => $trainer]);
+    }
+
 }

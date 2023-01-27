@@ -49,6 +49,7 @@
             <td>Email</td>
             <td>Membership Type</td>
             <td>Membership Expiration</td>
+            <td>Trainer</td>
             <td>Action</td>
           </tr>
         </thead>
@@ -61,7 +62,9 @@
             <td>{{ $member->email }}</td>
             <td>{{ $member->membership_type }}</td>
             <td>{{ $member->membership_expiration }}</td>
-            <td>
+            <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
+              {{ $member->trainer->name }}</a></td>
+            <td>              
               <button type="button" class="btn btn-small" onclick="showEditMemberModal({{ $member->id }});">🖊️</button>
               <a class="btn btn-sm" href="{{ route('deletemember', $member->id) }}">❌</a>
             </td>

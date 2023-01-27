@@ -17,7 +17,11 @@ use App\Http\Controllers\MemberController;
 Route::get('/', [ MemberController::class, 'index' ])->name('index');
 Route::get('/createmember', [ MemberController::class, 'createMember' ])->name('createmember');
 Route::post('/storemember', [ MemberController::class, 'storeMember' ])->name('storemember');
+
 Route::get('/editmember/{id}', [ MemberController::class, 'editMember' ])->name('editmember');
 Route::post('/updatemember', [ MemberController::class, 'updateMember' ])->name('updatemember');
 Route::get('/members/{id}', [ MemberController::class, 'showMember'])->name('members');
+
 Route::get('/deletemember/{id}', [ MemberController::class, 'deleteMember' ])->name('deletemember');
+
+Route::get('/trainer', [ MemberController::class, 'getTrainer' ])->name('trainer');
