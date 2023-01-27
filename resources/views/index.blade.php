@@ -99,10 +99,15 @@
                   <label for="createmember_email" class="form-label">Email</label>
                   <input type="email" class="form-control" name="email" id="createmember_email" required>
                 </div>
-                <!-- <div class="mb-3">
-                  <label for="createmember_memtype" class="form-label">Membership Type</label>
-                  <input type="string" class="form-control" name="membership_type" id="createmember_memtype" required>
-                </div> -->
+                <div class="mb-3">
+                  <label for="createmember_membership" class="form-label">Select Membership Type</label>
+                  <select class="form-select" aria-label="Default select example" name="membership_id" id="createmember_membership">
+                      <option selected class="text-center"> --- ---</option>                    
+                    @foreach($membership as $mem)
+                      <option value="{{ $mem->id }}">{{ $mem->membership_type}}</option>
+                    @endforeach
+                  </select>
+                </div>
                 <div class="mb-3">
                   <label for="createmember_trainer" class="form-label">Select Trainer</label>
                   <select class="form-select" aria-label="Default select example" name="trainer_id" id="createmember_trainer">

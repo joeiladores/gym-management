@@ -25,7 +25,7 @@ class MemberController extends Controller
 
         $member->name = $request->name;
         $member->email = $request->email;        
-        // $member->membership_type = $request->membership_type;
+        $member->membership_id = $request->membership_id;
         $member->trainer_id = $request->trainer_id;
         $member->membership_expiration = $request->membership_expiration;
 
@@ -44,9 +44,9 @@ class MemberController extends Controller
         $member = Member::find($request->id);
 
         $member->name  = $request->name;
-        $member->email = $request->email;
-        // $member->membership_type = $request->membership_type;
+        $member->email = $request->email;        
         $member->trainer_id = $request->trainer_id;
+        $member->membership_id = $request->membership_id;
         $member->membership_expiration = $request->membership_expiration;
 
         $member->save();
