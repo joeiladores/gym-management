@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 // 'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
                 'membership_expiration' => '2023-06-15',
                 'trainer_id' => fake()->randomDigit+1,
-                'membership_id' => fake()->randomDigit(3)+1,
+                'membership_id' => Arr::random([1, 2, 3]),
                
             ]);            
         }  
@@ -55,7 +55,11 @@ class DatabaseSeeder extends Seeder
         ]);   
         \App\Models\Membership::create([        
             'membership_type' => 'Monthly',   
-            'membership_price' => 1000,
+            'membership_price' => 1200,
+        ]); 
+        \App\Models\Membership::create([        
+            'membership_type' => 'Semi-Annual',   
+            'membership_price' => 6000,
         ]); 
         // \App\Models\Membership::create([        
         //     'membership_type' => 'Pay-As-You-Go',   
