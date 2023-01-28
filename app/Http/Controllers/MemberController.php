@@ -20,10 +20,10 @@ class MemberController extends Controller
         return view('createmember');
     }
 
-    public function storeMember(Request $request) {     
+    public function storeMember(Request $request) {   
+        $member = new Member;  
         
         $memberexist = Member::where('email', $request->email)->first();
-
         if($memberexist != NULL) {
             return redirect()->route('index')
             ->with('error', 'Member already exists!');
@@ -32,8 +32,6 @@ class MemberController extends Controller
             return redirect()->route('index')
             ->with('error', 'Failed to add new member! Must choose Membership option and Trainer. Please try again.');
         }
-
-        $member = new Member;
 
         $member->name = $request->name;
         $member->email = $request->email;        
@@ -52,8 +50,9 @@ class MemberController extends Controller
         return view('editmember')->with('member', $member);
     }
 
-    public function updateMember(Request $request) {
+    public function updateMember(Request $request) {        
         $member = Member::find($request->id);
+        $originalemail = $member->email;
 
         $member->name  = $request->name;
         $member->email = $request->email;        
@@ -61,8 +60,20 @@ class MemberController extends Controller
         $member->membership_id = $request->membership_id;
         $member->membership_expiration = $request->membership_expiration;
 
-        $member->save();
+        // IF new email is already existing in the database
+        if($member->email != $originalemail) {
+            $memberexist = Member::where('email', $member->email)->first();
+            if($memberexist != NULL) {
+                return redirect()->route('index')
+                ->with('error', 'Member already exists!');
+            }
+        }
+        if($request->membership_id < 1 || $request->trainer_id < 1) {
+            return redirect()->route('index')
+            ->with('error', 'Failed to update member! Membership option and Trainer must be selected. Please try again.');
+        }
 
+        $member->save();
         return redirect()->route('index')->with('success', 'Member is successfully updated!');
     }        
 
