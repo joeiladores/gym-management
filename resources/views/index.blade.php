@@ -108,7 +108,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="createmember_membership" class="form-label">Select Membership Type</label>
-                  <select class="form-select" aria-label="Default select example" name="membership_id" id="createmember_membership">
+                  <select class="form-select" aria-label="Default select example" name="membership_id" id="createmember_membership" required>
                       <option selected class="text-center"> --- ---</option>                    
                     @foreach($membership as $mem)
                       <option value="{{ $mem->id }}">{{ $mem->membership_type}}</option>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="createmember_trainer" class="form-label">Select Trainer</label>
-                  <select class="form-select" aria-label="Default select example" name="trainer_id" id="createmember_trainer">
+                  <select class="form-select" aria-label="Default select example" name="trainer_id" id="createmember_trainer" required>
                       <option selected class="text-center"> --- ---</option>                    
                     @foreach($trainers as $trainer)
                       <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="createmember_memexp" class="form-label">Membership Expiration</label>
-                  <input type="date" class="form-control" name="membership_expiration" id="createmember_memexp">
+                  <input type="date" class="form-control" name="membership_expiration" id="createmember_memexp" required>
                   <input type="hidden" name="id" id="id"">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

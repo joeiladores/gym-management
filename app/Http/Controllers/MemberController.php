@@ -24,8 +24,13 @@ class MemberController extends Controller
         
         $memberexist = Member::where('email', $request->email)->first();
 
-        if ($memberexist != NULL) {
-            return redirect()->route('index')->with('error', 'Member already exists!');
+        if($memberexist != NULL) {
+            return redirect()->route('index')
+            ->with('error', 'Member already exists!');
+        }
+        if($request->membership_id < 1 || $request->trainer_id < 1) {
+            return redirect()->route('index')
+            ->with('error', 'Failed to add new member! Must choose Membership option and Trainer. Please try again.');
         }
 
         $member = new Member;
