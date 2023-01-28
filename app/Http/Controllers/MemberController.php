@@ -20,7 +20,14 @@ class MemberController extends Controller
         return view('createmember');
     }
 
-    public function storeMember(Request $request) {
+    public function storeMember(Request $request) {     
+        
+        $memberexist = Member::where('email', $request->email)->first();
+
+        if ($memberexist != NULL) {
+            return redirect()->route('index')->with('error', 'Member already exists!');
+        }
+
         $member = new Member;
 
         $member->name = $request->name;
@@ -31,7 +38,7 @@ class MemberController extends Controller
 
         $member->save();
 
-        return redirect()->route('index')->with('success', 'New member has been added!');
+        return redirect()->route('index')->with('success', 'New member has been added!'); 
     }
 
     public function editMember($id) {
