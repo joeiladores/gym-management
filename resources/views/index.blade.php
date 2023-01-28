@@ -65,7 +65,10 @@
               <td>{{ $member->id }}</td>
               <td>{{ $member->name }}</td>
               <td>{{ $member->email }}</td>
-              <td>{{ $member->membership->membership_type }}</td>              
+              <td>
+                <a class="text-decoration-none" role="button" onclick="showMembershipInfoModal({{ $member->membership->id }});">
+                {{ $member->membership->membership_type }}</a>
+              </td>                   
               <td>{{ $member->membership_expiration }}</td>
               <td>
                 <a class="text-decoration-underline" role="button" onclick="showTrainerInfoModal({{ $member->trainer->id }});">
@@ -188,6 +191,46 @@
       </div>
     </div>
 
+    <!-- Display Membership Information Modal -->
+    <div class="modal modal-md fade" id="membershipInfoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bold text-center" id="staticBackdropLabel">Membership Info</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://source.unsplash.com/featured/300x400" class="img-fluid rounded-start" alt="..." style="height:auto;">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title fw-bold" id="showmembership_membername">Name</h5>
+                    <hr>
+                    <div class="row">
+                      <h5 class="fw-bold fst-italic">Membership info</h5>
+                      <div class="col-5">Type: </div>
+                      <div class="col" id="showmembership_type"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-5">Price: </div>
+                      <div class="col" id="showmembership_price"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-5">Expiration: </div>
+                      <div class="col" id="showmembership_expiration"></div>
+                    </div>
+                  </div>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Display Trainer Information Modal -->
     <div class="modal modal-md fade" id="trainerInfoModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -229,7 +272,6 @@
     //   trigger: 'focus'
     // });
 
-
     const editMemberModal = new bootstrap.Modal('#editMemberModal', {
       keyboard: false
     });
@@ -262,6 +304,23 @@
             document.getElementById('showtrainer_phone').innerHTML = data.phone;
             document.getElementById('showtrainer_id').innerHTML = data.id;
             trainerInfoModal.show();
+        })
+    }
+
+    
+    const membershipInfoModal = new bootstrap.Modal('#membershipInfoModal', {
+      keyboard: false
+    });
+
+    function showMembershipInfoModal(membership_id) {
+      fetch('{{ url('/membershipinfo/') }}/' + membership_id)
+        .then(response => response.json())
+        .then(data => {            
+            document.getElementById('showmembership_membername').innerHTML = data.name;
+            document.getElementById('showmembership_type').innerHTML = data.membership['membership_type'];
+            document.getElementById('showmembership_price').innerHTML = data.membership['membership_price'];
+            document.getElementById('showmembership_expiration').innerHTML = data.membership_expiration;
+            membershipInfoModal.show();
         })
     }
 

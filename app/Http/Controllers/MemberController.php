@@ -95,15 +95,28 @@ class MemberController extends Controller
     //     return view('trainerinfo', ['trainer' => $trainer]);
     // }
 
-    public function getMembership($id){
-        $membership = Membership::find($id);
-        return view('membership', ['membership' => $membership]);
-    }
+    // public function getMembership($id){
+    //     $membership = Membership::find($id);
+    //     return view('membership', ['membership' => $membership]);
+    // }
 
     // For modal display Trainer Information
     public function showTrainer($id) {
         $trainerinfo = Trainer::find($id);
         return response()->json($trainerinfo);
     }
+
+    // For modal display Membership Information
+    // public function showMembership($id) {
+    //     $membershipinfo = Membership::find($id)->with;        
+    //     return response()->json($membershipinfo);
+    // }
+
+    // For modal display Membership info using Member model - both memers and membership
+    public function showMembership($id) {
+        $membershipinfo = Member::with('membership')->find($id);
+        return response()->json($membershipinfo);
+    }
+
 
 }

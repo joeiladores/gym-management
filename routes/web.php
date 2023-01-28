@@ -27,5 +27,5 @@ Route::get('/deletemember/{id}', [ MemberController::class, 'deleteMember' ])->n
 // Route::get('/trainer', [ MemberController::class, 'getTrainer' ])->name('trainer');
 Route::get('/trainerinfo/{id}', [ MemberController::class, 'showTrainer'])->name('trainerinfo');
 
-ROute::get('/membership', [ MemberController::class, 'getMembership' ])->name('membership');
+ROute::get('/membershipinfo/{id}', [ MemberController::class, 'showMembership' ])->name('membershipinfo');
 
