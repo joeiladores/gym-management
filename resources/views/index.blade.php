@@ -60,10 +60,12 @@
               <td>{{ $member->id }}</td>
               <td>{{ $member->name }}</td>
               <td>{{ $member->email }}</td>
-              <td>{{ $member->membership->membership_type }}</td>
+              <td>{{ $member->membership->membership_type }}</td>              
               <td>{{ $member->membership_expiration }}</td>
-              <td><a href="{{ route('trainer', ['id' => $member->trainer->id]) }}">
-                {{ $member->trainer->name }}</a></td>
+              <td>
+                <a class="text-decoration-underline" role="button" onclick="showTrainerInfoModal({{ $member->trainer->id }});">
+                {{ $member->trainer->name }}</a>
+              </td>
               <td>              
                 <button type="button" class="btn btn-small" onclick="showEditMemberModal({{ $member->id }});">🖊️</button>
                 <a class="btn btn-sm" href="{{ route('deletemember', $member->id) }}">❌</a>
@@ -181,12 +183,48 @@
       </div>
     </div>
 
+    <!-- Display Trainer Information Modal -->
+    <div class="modal modal-md fade" id="trainerInfoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bold text-center" id="staticBackdropLabel">Trainer's Info</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card border-0">  
+              <div class="d-flex justify-content-center">
+                <img class="img-fluid rounded-2 justify-content-center" src="https://source.unsplash.com/featured/400x300" class="card-img-top" alt="..." style="height: auto; width:400px;">     
+              </div>                    
+              <div class="card-body">              
+                <div class="text-center">
+                  <h3 class="card-title fw-bold" id="showtrainer_name"></h3>
+                  <h5 class="card-text fst-italic" id="showtrainer_specialization"></h5>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <p class="card-text" id="showtrainer_email"></p>
+                  <p class="card-text" id="showtrainer_phone"></p>
+                  <input type="hidden" name="id" id="showtrainer_id">
+                </div>   
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
   <script>
+    // const popover = new bootstrap.Popover('.popover-dismiss', {
+    //   trigger: 'focus'
+    // });
+
+
     const editMemberModal = new bootstrap.Modal('#editMemberModal', {
       keyboard: false
     });
@@ -202,6 +240,23 @@
             document.getElementById('editmember_memexp').value = data.membership_expiration;
             document.getElementById('editmember_id').value = data.id;
             editMemberModal.show();
+        })
+    }
+
+    const trainerInfoModal = new bootstrap.Modal('#trainerInfoModal', {
+      keyboard: false
+    });
+
+    function showTrainerInfoModal(trainer_id) {
+      fetch('{{ url('/trainerinfo/') }}/' + trainer_id)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('showtrainer_name').innerHTML = data.name;
+            document.getElementById('showtrainer_specialization').innerHTML = data.specialization;
+            document.getElementById('showtrainer_email').innerHTML = data.email;
+            document.getElementById('showtrainer_phone').innerHTML = data.phone;
+            document.getElementById('showtrainer_id').innerHTML = data.id;
+            trainerInfoModal.show();
         })
     }
 

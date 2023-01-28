@@ -35,19 +35,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Generate 10 Members
-        for($j = 0; $j < 10; $j++){
-            \App\Models\Member::create([
-                'name' => fake()->name,
-                'email' => fake()->safeEmail,
-                // 'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
-                'membership_expiration' => '2023-06-15',
-                'trainer_id' => fake()->randomDigit+1,
-                'membership_id' => Arr::random([1, 2, 3]),
-               
-            ]);            
-        }  
-
         // Membership
         \App\Models\Membership::create([        
             'membership_type' => 'Annual',   
@@ -65,5 +52,20 @@ class DatabaseSeeder extends Seeder
         //     'membership_type' => 'Pay-As-You-Go',   
         //     'membership_price' => 10000,
         // ]); 
+
+        // Generate 10 Members
+        for($j = 0; $j < 10; $j++){
+            \App\Models\Member::create([
+                'name' => fake()->name,
+                'email' => fake()->safeEmail,
+                // 'membership_type' => Arr::random(['Monthly', 'Annual', 'Pay-As-You-Go']),
+                'membership_expiration' => '2023-06-15',
+                'trainer_id' => fake()->randomDigit+1,
+                'membership_id' => Arr::random([1, 2, 3]),
+               
+            ]);            
+        }  
+
+        
     }
 }

@@ -24,6 +24,8 @@ Route::get('/members/{id}', [ MemberController::class, 'showMember'])->name('mem
 
 Route::get('/deletemember/{id}', [ MemberController::class, 'deleteMember' ])->name('deletemember');
 
-Route::get('/trainer', [ MemberController::class, 'getTrainer' ])->name('trainer');
+// Route::get('/trainer', [ MemberController::class, 'getTrainer' ])->name('trainer');
+Route::get('/trainerinfo/{id}', [ MemberController::class, 'showTrainer'])->name('trainerinfo');
 
 ROute::get('/membership', [ MemberController::class, 'getMembership' ])->name('membership');
+

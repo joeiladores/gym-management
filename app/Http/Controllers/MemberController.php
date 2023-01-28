@@ -61,20 +61,26 @@ class MemberController extends Controller
         return redirect()->route('index')->with('success', 'Member is successfully deleted!');
     }
 
-    // For modal display
+    // For modal display Member Information for Edit
     public function showMember($id) {
         $member = Member::find($id);
         return response()->json($member);
     }
 
-    public function getTrainer($id){
-        $trainer = Trainer::find($id);
-        return view('trainer', ['trainer' => $trainer]);
-    }
+    // public function getTrainer($id){
+    //     $trainer = Trainer::find($id);
+    //     return view('trainerinfo', ['trainer' => $trainer]);
+    // }
 
     public function getMembership($id){
         $membership = Membership::find($id);
         return view('membership', ['membership' => $membership]);
+    }
+
+    // For modal display Trainer Information
+    public function showTrainer($id) {
+        $trainerinfo = Trainer::find($id);
+        return response()->json($trainerinfo);
     }
 
 }
