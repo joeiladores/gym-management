@@ -16,9 +16,9 @@ class MemberController extends Controller
             ->with('membership', Membership::get());
     }
 
-    public function createMember() {
-        return view('createmember');
-    }
+    // public function createMember() {
+    //     return view('createmember');
+    // }
 
     public function storeMember(Request $request) {   
         $member = new Member;  
@@ -106,13 +106,8 @@ class MemberController extends Controller
         return response()->json($trainerinfo);
     }
 
-    // For modal display Membership Information
-    // public function showMembership($id) {
-    //     $membershipinfo = Membership::find($id)->with;        
-    //     return response()->json($membershipinfo);
-    // }
 
-    // For modal display Membership info using Member model - both memers and membership
+    // For modal display Membership info using Member model - both membersand membership info
     public function showMembership($id) {
         $membershipinfo = Member::with('membership')->find($id);
         return response()->json($membershipinfo);

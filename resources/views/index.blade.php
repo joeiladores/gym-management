@@ -63,15 +63,13 @@
             @foreach($members as $member)
             <tr>
               <td>{{ $member->id }}</td>
-              <td>{{ $member->name }}</td>
+              <td>
+                <a class="text-decoration-none" role="button" onclick="showMembershipInfoModal({{ $member->id }});">{{ $member->name }}</a></td>
               <td>{{ $member->email }}</td>
+              <td>{{ $member->membership->membership_type }}</td>                   
+              <td>{{ date_format(new DateTime($member->membership_expiration), "F j, Y") }}</td>
               <td>
-                <a class="text-decoration-none" role="button" onclick="showMembershipInfoModal({{ $member->membership->id }});">
-                {{ $member->membership->membership_type }}</a>
-              </td>                   
-              <td>{{ $member->membership_expiration }}</td>
-              <td>
-                <a class="text-decoration-underline" role="button" onclick="showTrainerInfoModal({{ $member->trainer->id }});">
+                <a class="text-decoration-none" role="button" onclick="showTrainerInfoModal({{ $member->trainer->id }});">
                 {{ $member->trainer->name }}</a>
               </td>
               <td>              
